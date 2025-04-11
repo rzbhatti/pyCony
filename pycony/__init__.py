@@ -89,7 +89,10 @@ def pickle_args(n, pkl_sufix=None, file_path=None):
         arguments = inspect.getargvalues(target_frame).locals
         try:
             if file_path is None:
-                file_path = '_'.join([target_frame_info.function,pkl_sufix])+'.pkl'
+                if pkl_sufix is not None:
+                    file_path = '_'.join([target_frame_info.function,pkl_sufix])+'.pkl'
+                else:
+                    file_path = target_frame_info.function+'.pkl'
             with open(file_path, 'wb') as f:
                 pickle.dump(arguments, f)
             print(f"Arguments from function '{target_frame_info.function}' at stack position {n} pickled to '{file_path}'.")
