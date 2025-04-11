@@ -12,7 +12,7 @@ Usage:
 Functions:
     open_console()
     print_stack(depth=None)
-    pickle_args(n, pkl_sufix=None, file_path=None)
+    pickle_args(n, pkl_suffix=None, file_path=None)
     print_stack(depth=None)
     load_pickled_args(file_path)
     open_console_print_stack(depth=None)
@@ -72,14 +72,14 @@ def print_stack(depth=None):
         print("=" * 80)
 
 
-def pickle_args(n, pkl_sufix=None, file_path=None):
+def pickle_args(n, pkl_suffix=None, file_path=None):
     """
     Pickles the arguments of the function call at stack position n
     (relative to the open_interactive_console call) to the given file path.
     Args:
         n (int): The stack position (1 for the immediate caller, 2 for its caller, etc.).
         file_path (optional str): The full path to the file where the arguments will be pickled.
-        pkl_sufix (optional str): file_path = '_'.join([target_frame_info.function,pkl_sufix])+'.pkl'
+        pkl_suffix (optional str): ignore if file_path is passed else file_path = '_'.join([target_frame_info.function,pkl_suffix])+'.pkl'
     """
     frame = inspect.currentframe()
     call_stack = inspect.getouterframes(frame, 0)
@@ -88,11 +88,11 @@ def pickle_args(n, pkl_sufix=None, file_path=None):
         target_frame = target_frame_info.frame
         arguments = inspect.getargvalues(target_frame).locals
         try:
-            if file_path is None:
-                if pkl_sufix is not None:
-                    file_path = '_'.join([target_frame_info.function,pkl_sufix])+'.pkl'
-                else:
-                    file_path = target_frame_info.function+'.pkl'
+            if file_path is None and pkl_suffix is not None:
+                    file_path = '_'.join([target_frame_info.function,pkl_suffix])+'.pkl'     
+            elif file_path is None:
+                file_path = target_frame_info.function+'.pkl'
+            print('DEBUG:', n, pkl_suffix, file_path)  
             with open(file_path, 'wb') as f:
                 pickle.dump(arguments, f)
             print(f"Arguments from function '{target_frame_info.function}' at stack position {n} pickled to '{file_path}'.")
