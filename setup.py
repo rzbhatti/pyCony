@@ -1,6 +1,15 @@
 from setuptools import setup, find_packages
 import os
 
+# Read the content of your README file
+def read_readme():
+    try:
+        with open('README.md', encoding='utf-8') as f:
+            return f.read()
+    except FileNotFoundError:
+        return ''
+    
+
 setup(
     name='pycony',  # Use the new package name
     version='0.1.0',
@@ -9,14 +18,14 @@ setup(
     author='Dr. Rashed Z. Bhatti',
     author_email='rzbhatti@gmail.com',
     description='A cute Python utility to open an interactive console with stack inspection.',
-    long_description=open('README.md').read() if 'README.md' in os.listdir('.') else '',
+    long_description= read_readme(),
     long_description_content_type='text/markdown',
     url='https://github.com/rzbhatti/pyCony.git', 
     license='MIT',
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
-        'Topic :: Python Development :: Debuggers',
+        'Topic :: Software Development :: Debuggers',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
