@@ -1,4 +1,4 @@
-from pycony import *
+from pycony import open_console_print_stack
 
 if __name__ == "__main__":
     global_value = "Global Value"
@@ -17,5 +17,3 @@ if __name__ == "__main__":
 
     outer_function(10)
     print("Program finished.")
-
-
