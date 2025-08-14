@@ -32,11 +32,15 @@ import pdb
 readline.clear_history()
 
 
-def open_console():
+def open_console(label=None):
     """
     Opens an interactive Python console with access to the current scope.
+    Optionally prints a context label where the console is inserted.
     Includes a try-except block to prevent crashes during console initialization.
     Accesses both local and global variables.
+
+    Args:
+        label (str, optional): Contextual label to print before opening the console.
     """
     frame = inspect.currentframe().f_back
     globals_dict = frame.f_globals
@@ -45,6 +49,12 @@ def open_console():
     # Combine locals and globals into a single dictionary for the console
     combined_scope = locals_dict.copy()
     combined_scope.update(globals_dict)
+
+    if frame is not None:
+        print(f'pyCony [open_console]: "{frame.f_code.co_filename}", line {frame.f_lineno}')
+    
+    if label is not None:
+        print(f"pyCony [open_console] label: {label}")
 
     try:
         console = code.InteractiveConsole(combined_scope)
@@ -151,6 +161,9 @@ def open_console_print_stack(depth=None):
         depth += 1
     frame = inspect.currentframe()
     call_stack = inspect.getouterframes(frame, 0)
+
+    if frame is not None:
+        print(f'pyCony [open_console]: "{frame.f_code.co_filename}", line {frame.f_lineno}')
 
     # print the stack
     print("=" * 25, " Interactive Console: Stack ", "=" * 25)
