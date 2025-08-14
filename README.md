@@ -44,6 +44,7 @@ python test/test.py
 ```shell
 Inside outer_function, local_outer: 15
 Inside inner_function, local_inner: 30
+pyCony [open_console]: "......../test.py", line 9
 =========================  Interactive Console: Stack  =========================
   1. Function: outer_function
      Arguments:
@@ -58,7 +59,7 @@ Inside inner_function, local_inner: 30
 ================================================================================
 Use Ctrl+D (or quit()) to exit and resume program flow.
  Use pickle_args(n, file_path) to dump the args
->>> 
+>>>  
 now exiting InteractiveConsole...
 Back in inner_function
 Back in outer_function

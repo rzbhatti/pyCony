@@ -163,7 +163,7 @@ def open_console_print_stack(depth=None):
     call_stack = inspect.getouterframes(frame, 0)
 
     if frame is not None:
-        print(f'pyCony [open_console]: "{frame.f_code.co_filename}", line {frame.f_lineno}')
+        print(f'pyCony [open_console]: "{frame.f_back.f_code.co_filename}", line {frame.f_back.f_lineno}')
 
     # print the stack
     print("=" * 25, " Interactive Console: Stack ", "=" * 25)

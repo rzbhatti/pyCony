@@ -12,7 +12,7 @@ def read_readme():
 
 setup(
     name="pycony",  # Use the new package name
-    version="0.1.2",
+    version="0.1.3",
     packages=["pycony"],  # Specify the package directory
     install_requires=[],
     author="Dr. Rashed Z. Bhatti",
