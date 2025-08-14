@@ -50,8 +50,11 @@ def open_console(label=None):
     combined_scope = locals_dict.copy()
     combined_scope.update(globals_dict)
 
+    if frame is not None:
+        print(f'pyCony [open_console]: "{frame.f_code.co_filename}", line {frame.f_lineno}')
+    
     if label is not None:
-        print(f"[open_console] Context label: {label}")
+        print(f"pyCony [open_console] label: {label}")
 
     try:
         console = code.InteractiveConsole(combined_scope)
@@ -158,6 +161,9 @@ def open_console_print_stack(depth=None):
         depth += 1
     frame = inspect.currentframe()
     call_stack = inspect.getouterframes(frame, 0)
+
+    if frame is not None:
+        print(f'pyCony [open_console]: "{frame.f_code.co_filename}", line {frame.f_lineno}')
 
     # print the stack
     print("=" * 25, " Interactive Console: Stack ", "=" * 25)
